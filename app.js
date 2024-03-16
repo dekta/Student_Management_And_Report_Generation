@@ -1,9 +1,9 @@
 const express = require('express')
-const { authRouter } = require('./src/controllers/auth.controllers')
 const swaggerJsdoc = require('swagger-jsdoc')
 const swaggerUi = require('swagger-ui-express')
 const options = require('./src/utils/swagger')
 const { db_connection } = require('./src/config/db')
+const { authRouter } = require('./src/routes/auth.routes')
 
 const app = express()
 app.use(express.json())
