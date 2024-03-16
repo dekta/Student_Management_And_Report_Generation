@@ -68,7 +68,7 @@ const options = {
       }
     ]
   },
-  apis: ['./src/controllers/auth.controller.js']
+  apis: ['../routes/auth.routes.js']
 }
 
 module.exports = options
