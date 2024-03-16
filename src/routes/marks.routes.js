@@ -5,7 +5,7 @@ const marksRouter = express.Router()
 
 /**
  * @swagger
- * /api/students/{studentId}/marks:
+ * /marks/addmarks/{studentId}:
  *   post:
  *     summary: Add marks for a student.
  *     description: Add marks for a student identified by the provided student ID.
@@ -70,7 +70,7 @@ marksRouter.post('/addmarks/:studentId', tokenValidator, addMarks)
 
 /**
  * @swagger
- * /api/students/{studentId}/marks:
+ * /marks/updatemarks/{studentId}:
  *   put:
  *     summary: Update marks for a student.
  *     description: Update marks for a student identified by the provided student ID.

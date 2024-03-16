@@ -6,9 +6,10 @@ const authRouter = express.Router()
 
 /**
  * @swagger
- * /signup:
+ * /auth/signup:
  *   post:
- *     summary: Register a new user
+ *     summary: User signup
+ *     description: Register a new user with the provided credentials
  *     requestBody:
  *       required: true
  *       content:
@@ -18,25 +19,60 @@ const authRouter = express.Router()
  *             properties:
  *               name:
  *                 type: string
+ *                 description: Name of the user.
+ *                 example: John Doe
  *               email:
  *                 type: string
+ *                 description: Email of the user.
+ *                 example: john@example.com
  *               password:
  *                 type: string
+ *                 description: Password of the user.
+ *                 example: myPassword123
  *     responses:
- *       200:
+ *       '200':
  *         description: Signup successful
- *       404:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   description: A success message.
+ *                   example: Signup successful
+ *       '404':
  *         description: User already exists
- *       500:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   description: Error message.
+ *                   example: User already exists
+ *       '500':
  *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   description: Error message.
+ *                   example: Internal server error occurred.
  */
+
 authRouter.post('/signup', validate, signup)
 
 /**
  * @swagger
- * /login:
+ * /auth/login:
  *   post:
  *     summary: Authenticate user
+ *     description: Authenticate user with provided email and password.
  *     requestBody:
  *       required: true
  *       content:
@@ -46,18 +82,59 @@ authRouter.post('/signup', validate, signup)
  *             properties:
  *               email:
  *                 type: string
+ *                 description: Email of the user.
+ *                 example: john@example.com
  *               password:
  *                 type: string
+ *                 description: Password of the user.
+ *                 example: myPassword123
  *     responses:
- *       200:
+ *       '200':
  *         description: Login successful
- *       400:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ *                   description: JWT token foInternal server errorr authentication.
+ *                   example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+ *       '400':
  *         description: Invalid credentials
- *       404:
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   description: Error message.
+ *                   example: Invalid email or password.
+ *       '404':
  *         description: User not found
- *       500:
- *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   description: Error message.
+ *                   example: User with this email does not exist.
+ *       '500':
+ *         description: Something went wrong
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 error:
+ *                   type: string
+ *                   description: Error message.
+ *                   example: Internal server error occurred.
  */
+
 authRouter.post('/login', login)
 
 module.exports = { authRouter }
