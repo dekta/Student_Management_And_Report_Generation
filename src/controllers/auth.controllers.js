@@ -10,6 +10,7 @@ const { TOKEN_EXPIRATION_TIME } = require('../utils/constants')
  * @param {object} res - Express response object
  * @returns {object} - JSON response indicating signup status
  */
+
 const signup = async (req, res) => {
   const { name, email, password } = req.body
   try {
@@ -26,7 +27,7 @@ const signup = async (req, res) => {
         }
       })
     } else {
-      res.status(409).json({ message: 'User already exists' })
+      res.status(404).json({ message: 'User already exists' })
     }
   } catch (err) {
     res
@@ -50,7 +51,7 @@ const login = async (req, res) => {
         if (err) {
           res.status(400).json({
             message: 'Something went wrong.',
-            error: 'Invalid credentials'
+            error: 'Invalid email or password.'
           })
         } else {
           if (result) {
@@ -59,7 +60,10 @@ const login = async (req, res) => {
             })
             res.status(200).json({ message: 'Login successful', token })
           } else {
-            res.status(401).json({ message: 'Invalid credentials' })
+            res.status(401).json({
+              message: 'Invalid credentials',
+              error: 'Invalid email or password.'
+            })
           }
         }
       })
@@ -69,7 +73,7 @@ const login = async (req, res) => {
   } catch (err) {
     res
       .status(500)
-      .json({ message: 'Something went wrong.', error: err.message })
+      .json({ message: 'Something went wrong', error: err.message })
   }
 }
 

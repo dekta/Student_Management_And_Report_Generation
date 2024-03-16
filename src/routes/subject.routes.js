@@ -9,7 +9,7 @@ const subjectRouter = express.Router()
 
 /**
  * @swagger
- * /allsubjects:
+ * /subject/allsubjects:
  *   get:
  *     summary: Get all subjects filtered by grade level.
  *     description: Retrieve all subjects or filter by grade level.
@@ -36,7 +36,7 @@ subjectRouter.get('/allsubjects', tokenValidator, getAllSubjectByGradeLevel)
 
 /**
  * @swagger
- * /createsubject:
+ * /subject/createsubject:
  *   post:
  *     summary: Create a new subject.
  *     description: Create a new subject with the provided name and grade level.
