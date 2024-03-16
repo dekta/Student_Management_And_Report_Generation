@@ -2,7 +2,7 @@ require('dotenv').config()
 const jwt = require('jsonwebtoken')
 
 const tokenValidator = (req, res, next) => {
-  let token = req.headers.authorization
+  let token = req.headers.authorization.split(' ')[1]
   jwt.verify(token, process.env.salt, function (err, decoded) {
     if (decoded) {
       req.headers.userId = decoded.userId
