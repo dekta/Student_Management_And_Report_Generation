@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 
 const tokenValidator = (req, res, next) => {
   let token = req.headers.authorization.split(' ')[1]
-  jwt.verify(token, process.env.salt, function (err, decoded) {
+  jwt.verify(token, process.env.SALT, function (err, decoded) {
     if (decoded) {
       req.headers.userId = decoded.userId
       next()
